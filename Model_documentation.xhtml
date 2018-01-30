@@ -1,0 +1,3237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Model</title>
+    <meta name="created-at" content="2018-01-30 16:15:58"/>
+    <meta name="generator" content="GINsim"/>
+    <style type="text/css">
+table {border-collapse: collapse;}
+
+.L1{}
+
+.table th, table td{border: 1px solid black}
+</style>
+    <script type="text/javascript">
+<![CDATA[function getElementsByContent(content, tagName) {
+	var elements = new Array();
+	var nodes = document.getElementsByTagName(tagName);
+	for (var i = 0, node; node = nodes[i]; i++) {
+			if (node.innerHTML.indexOf(content) != -1) elements.push(node);
+	}
+	return elements;
+}
+
+function nextSiblingOfType(node, nodeName, validAttributes) {
+	if (validAttributes == null) validAttributes = function (node) {return true;};
+	node = node.nextSibling;
+	while ((node.nodeName != nodeName || (node.nodeName == nodeName && !validAttributes(node))) && node.nextSibling != null)
+		node = node.nextSibling;
+	return node;
+}
+
+function makeStableStatesClickable() {
+	var tables = getElementsByContent('Stable states', 'td');
+	var i;
+	for (i = 0 ; i - tables.length != 0 ; i++) {
+		var td_stableState = tables[i];//the td containing Stable states
+		var tr = tables[i].parentNode;
+		p = document.createElement('p');
+		p.innerHTML = tables[i].innerHTML + ' (';
+		a = document.createElement('a');
+		a.setAttribute('href', 'javascript:toggle(this, "stableState'+i+'")');
+		a.innerHTML = 'View';
+		p.appendChild(a);
+		p.innerHTML += ')';
+		tables[i].replaceChild(p, tables[i].firstChild) ;
+
+		tr = nextSiblingOfType(tr, tr.nodeName, function (node) {
+			node = nextSiblingOfType(node.firstChild, tables[i].nodeName, null);
+			if (node.getAttribute("colspan") != null && node.getAttribute("colspan") > 3) return true;
+			return false;
+		})
+		var td_new = nextSiblingOfType(tr.firstChild, tables[i].nodeName, null);
+		td = document.createElement('td');
+		td.setAttribute('colspan', '5');
+		p = document.createElement('p');
+		p.innerHTML = td_new.innerHTML;
+		p.setAttribute('id', 'stableState'+i);
+		p.style.display = 'none';
+		td.appendChild(p);
+		tr.replaceChild(td, td_new);
+	}
+}
+
+function toggle(a, id) {
+	elm = document.getElementById(id);
+	if (elm.style.display == 'none') {
+		elm.style.display = 'inline';
+		a.innerHTML = 'Hide';
+	} else {
+		elm.style.display = 'none'
+		a.innerHTML = 'View';
+	}
+}
+
+window.onload = makeStableStatesClickable;
+]]>    </script>
+    <style type="text/css">    </style>
+  </head>
+  <body>
+    <h1>Description of the model "Model"</h1>
+    <img src="Model_documentation.xhtml_FILES/model.png"/>
+    <h2>Annotation</h2>
+    <p>Logical network model of the regulation cell-cell and  focal adhesion dynamics.  <br /><br />Model is composed by a total of 51 nodes and 136 interactions:<br />-8 inputs (signals from ECM and neighbouring cells).<br />- 2 outputs (cell-cell adhesion strength and focal adhesion dynamics). <br />- 41 internal nodes (membrane proteins, signalling cascade proteins, transcription factors genes and micro RNA). <br /><br />Network model includes: <br />1) Phospho-regulation of E-cadherin/catenins complex;<br />2) Transcriptional regulation of E-cadherin by SNAIL and ZEB; <br />3) Growth factors &amp; integrin signalling crosstalk;<br />4) Notch, TGFb &amp; growth factor signalling crosstalk; <br />5) Hippo &amp; Wnt/beta-catenin signalling crosstalk.<br />6) STAT3 and Hypoxia Signalling. </p>
+    <p/>
+    <h2>Nodes</h2>
+    <table class="table">
+      <tr class="">
+        <th>ID</th>
+        <th>Val</th>
+        <th>Logical function</th>
+        <th>Comment</th>
+      </tr>
+      <tr>
+        <th>IL6</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Interleukin-6  (P05231, P40189).<br /><br />Microenvironment cue highly concentrated during chronic inflammation in malignant tumours (Landskron et al. 2014). Promotes down-regulation of E-cadherin mediated cell adhesion during EMT in breast cancer  (Xie et al. 2012). <br /><br />Effect: Positive regulation of JAK-STAT/MAPK cascade (GO:0046427, GO:0043410).<br />0 = basal activity <br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P05231">uniprot:P05231</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P40189">uniprot:P40189</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24901008">pmid:24901008</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/22134360">pmid:22134360</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>ROS</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Reactive oxygen chemical species (ROS).<br /><br />Produced in the tumour microenvironment by hypoxia and inflammation. Thought to be involved in EMT and tumour invasion in combination with ECM, cytokines and growth factors (Gilkes et al 2014, Landskron et al. 2014). <br /><br />Effect: Oxidation potential required for the transcription activation of HIF1a and activity inhibition of proteins (Solaini et al. 2010, Landskron et al. 2014).<br />0 = basal activity <br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/20153717">pmid:20153717</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24827502">pmid:24827502</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24901008">pmid:24901008</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>ECM</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Collagen / fibronectin induced extracellular matrix stiffness (Frantz et al. 2010).<br /><br />Promotes the formation of focal adhesions and increases the migration potential in tumours (Canel et al. 2013).<br /><br />Effect: Integrin signalling activation potential (Frantz et al. 2010, Canel et al. 2013)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/21123617">pmid:21123617</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23525005">pmid:23525005</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>EGF</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Epidermal growth factor (Schneider &amp; Wolf 2009).<br /><br />Endocrine or paracrine signal from the microenvironment required for all epithelial tissues that can induce loss of cell-cell adhesion and EMT (Schneider &amp; Wolf 2009, Liu et al. 2014).<br /><br />Effect: activation of growth factor receptor protein family HER1 and HER2 (Schneider &amp; Wolf 2009).<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/19006176">pmid:19006176</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>HGF</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Hepatocyte growth factor (P14210).<br /><br />Paracrine signal from the microenvironmet  involved in liver and other epithelial tissues regeneration that stimulate EMT (Nakamura  et al. 2011, Farrell et al. 2014).<br /><br />Effect: hepatocyte growth factor receptor activation  (Nakamura  et al. 2011)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P14210">uniprot:P14210</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/21199531">pmid:21199531</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24766643">pmid:24766643</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>RPTPL</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Generic Receptor Protein-Tyrosine Phosphatase  Ligand (Q15262; P07996). <br /><br />Neigbour cell signal through cell-cell contact (e.g. RPTP kappa or Thrombospondin-1) that activate receptor protein tyrosine phosphatases kappa and DEP1 (Mohebiany et al. 2013, Takahashi et al. 2012).<br /><br />Effect: Binding to RPTPs in cell-cell contacts (Mohebiany et al. 2013, Takahashi et al. 2012)<br />0 = basal activity  <br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/22682003">pmid:22682003</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/22308318">pmid:22308318</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q15262">uniprot:Q15262</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P07996">uniprot:P07996</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>FAT4L</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Generic FAT4 ligands (Q96JQ0).<br /><br />Neigbour cell signal through cell-cell contact that activates Hippo signalling by FAT4 receptor/ligand binding (Mao et al. 2015, 2016).<br /><br />Effect: FAT4 binding  (Mao et al. 2015, 2016).<br />0 = basal activity  <br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q96JQ0">uniprot:Q96JQ0</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/26116666">pmid:26116666</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/27145737">pmid:27145737</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>DELTA</th>
+        <td/>
+        <td>no function</td>
+        <td>
+          <p>Delta-like protein ligands (P78504; O00548).<br /><br />Neigbour cell signal through cell-cell contact that participates in EMT and enhances cancer invasion (Espinoza &amp; Miele 2013).<br /><br />Effect: positive regulation of Notch signaling pathway (GO:0045747)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P78504">uniprot:P78504</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/O00548">uniprot:O00548</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23973264">pmid:23973264</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>NOTCH</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>DELTA &amp; !DVL</li>
+          </ul>
+        </td>
+        <td>
+          <p>Neurogenic locus notch homolog protein (P46531).<br /><br />Considered to enhance invasion of human carcinomas through EMT by the crosstalk with EGFR and AKT/NFkB signalling (Espinoza &amp; Miele et al.  2013).  <br /><br />Effect: transcription factor activity, sequence-specific DNA binding (GO:0003700) <br />0 = basal activity<br />1 = high activity<br /> </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P46531">uniprot:P46531</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23973264">pmid:23973264</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>DELTA</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in myoblast C2C12, melanoma B16 cell line and by structural analysis (Narui &amp; Salaita 2013, Zhang et al. 2014, Kershaw et al . 2015).  <br />Annotated in KEGG pathways reference map for the regulation of NOTCH signalling (map04330).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24359737">pmid:24359737</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24714813">pmid:24714813</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25715738">pmid:25715738</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>DVL</th>
+              <td>
+                <p>Inhibits by a  molecular binding mechanism.<br />Experimentally demonstrated in human breast cancer cells and Xenopus during development (Collu et al. 2012,  Yong et al. 2011).<br />Annotated in KEGG pathways reference map for the regulation of NOTCH signalling (map04330).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23132247">pmid:23132247</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21520243">pmid:21520243</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>CSL</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>NOTCH</li>
+          </ul>
+        </td>
+        <td>
+          <p>C protein binding factor 1/Suppressor of Hairless/Lag-1 active complex (Wang et al. 2010).<br /><br />Protein complex that activates NOTCH induced gene expression, enhances EMT through the crosstalk with TGF beta and EGF signalling  (Wang et al. 2010, Espinoza &amp; Miele 2013). <br /><br />Effect: transcription factor activity (Wang et al. 2010, Espinoza &amp; Miele 2013)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/23973264">pmid:23973264</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>NOTCH</th>
+              <td>
+                <p>Activates by a molecular binding, transport and transcription mechanism.<br />Experimentally demonstrated in human prostate and breast cancer cells and in Xenopus during development (Collu et al. 2012,  Yong et al. 2011).<br />Annotated in KEGG pathways reference map for the regulation of NOTCH signalling (map04330).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23132247">pmid:23132247</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21520243">pmid:21520243</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>TGFb-TGFbR</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>TCF_LEF</li>
+          </ul>
+        </td>
+        <td>
+          <p>Transforming growth factor beta 1 ligand/receptor complex (P01137;  P36897).<br /><br />Negative regulation of cell-cell adhesion (GO:0022408).<br /><br />Effect: signal transducer activity, downstream of receptor (GO:0005057)<br />0 = basal activity  <br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P01137">uniprot:P01137</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P36897">uniprot:P36897</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TCF_LEF</th>
+              <td>
+                <p>Activates by a transcriptional and translational mechanism.   <br />Experimentally demonstrated in epithelial cell lines DLD1, MDCK, A375 , P2E, P2M, Huh7, HLE, and HLF (Medici et al. 2008, Steinway et al. 2014).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18799618">pmid:18799618</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25189528">pmid:25189528</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>SMAD</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>TGFb-TGFbR &amp; ILK &amp; YAP_TAZ</li>
+          </ul>
+        </td>
+        <td>
+          <p>SMAD 2, 3 and 4 signal transducer complex (P84022; Q13485; Q15796). <br /><br />TGFb signalling cascade component that promotes EMT and down-regulation of E-cadherin mediated cell-cell adhesion (Lamouille et al. 2014).                                                               <br /><br />Effect: transcription factor activity, sequence-specific DNA binding (GO:0003700) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P84022">uniprot:P84022</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q13485">uniprot:Q13485</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q15796">uniprot:Q15796</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TGFb-TGFbR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.    <br />Experimentally demonstrated in epithelial and endothelial cell lines NmuM, Mv 1 Lu, HaCaT, HMEC, NHEK and NMuMG (Piek et al 1999, Zhang et al. 2004, Valcourt et al. 2005).<br />Annotated in KEGG pathways reference map for the regulation of TGF-beta signalling (map04350).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10574705">pmid:10574705</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/14966294">pmid:14966294</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15689496">pmid:15689496</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ILK</th>
+              <td>
+                <p>Activates by  a phosphorylation mechanism.  <br />Experimentally demonstrated in dermal fibroblasts isolated from mice (Vi et al. 2011).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21150927">pmid:21150927</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>YAP_TAZ</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.<br />Experimentally demonstrated in human and mouse fibroblasts (Szeto  et al. 2016).<br />Annotated in KEGG pathways reference map for the regulation of Hippo signalling (map04390).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26961347">pmid:26961347</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>MET</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(CD44 | HGF | ITGab) &amp; !RPTP</li>
+          </ul>
+        </td>
+        <td>
+          <p>Hepatocyte growth factor receptor (P08581).<br /><br />Transmembrane protein with tyrosine kinase activity that senses HGF in the microenvironment and promotes EMT, frequently associated to many types of invasive cancers (Organ et al. 2011). <br />                                                 <br />Effect: protein tyrosine kinase activity (GO:0004713)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P08581">uniprot:P08581</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/22128289">pmid:22128289</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>CD44</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in keratinocytes, epithelial cell line MDCK  and colon adenocarcinoma HT29 cell line (Orian-Rousseauet al. 2002).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).<br /><br /><br />  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12464636">pmid:12464636</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ITGab</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.   <br />Experimentally demonstrated in epithelial cell lines SKOV3ip1, HeyA8, HEK 293, MKN-45, GTL-16 and AGS (Mitra et al. 2011, Mai et al. 2014).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21119598">pmid:21119598</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24790222">pmid:24790222</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>HGF</th>
+              <td>
+                <p>Activates by a molecular binding mechanism. <br />Experimentally demonstrated in epithelial cell lines H441, H226, A549, H2170, MCF7, H661, Ln229, U87MG, Ln18, U138, U118, and H596 (Dua et al.  2011).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21283737">pmid:21283737</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RPTP</th>
+              <td>
+                <p>Inhibits by a dephosphorylation mechanism.  <br />Experimentally demonstrated for DEP1 in epithelial cell lines  HEK-293, MDA-MB-231 and T-47D (Palka et al. 2003). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12475979">pmid:12475979</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>EGFR</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(EGF | CSL | TGFb-TGFbR | SRC | ITGab) &amp; !RPTP</li>
+          </ul>
+        </td>
+        <td>
+          <p>Human epidermal growth factor receptor family members 1 and 2  (P00533; P04626).<br /><br />Induces down-regulation of E-cadherin mediated cell adhesion and promotes EMT (Lu et al. 2003, Baker et al. 2014, Roskoski 2014).   <br /><br />Effect: signal transducer, downstream of receptor, with protein tyrosine kinase activity (GO:0004716)<br />0 = basal activity <br />1 = high activity (HER1+ HER2 signalling)</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P00533">uniprot:P00533</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P04626">uniprot:P04626</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/14706341">pmid:14706341</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/25566499">pmid:25566499</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24269963">pmid:24269963</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TGFb-TGFbR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.   <br />Experimentally demonstrated in epithelial and carcinoma cell lines MCF10A, MDA-MB-453 and BT-47 (Wang et al. 2009).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19147560">pmid:19147560</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CSL</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.   <br />Experimentally demonstrated in glioma cell lines U87MG and T98G and in carcinoma cell lines  HTC116, NCI-H292, MCF-10A and BT20 (Purow et al. 2008, Kang et al. 2011 Hartman et al. 2013).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18359760">pmid:18359760</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21622856">pmid:21622856</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23027125">pmid:23027125</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in fibroblast cell line C3H10T and in breast cancer cell line MCF7 (Tice et al. 1999, Mueller et al. 2012).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23066441">pmid:23066441</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9990038">pmid:9990038</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ITGab</th>
+              <td>
+                <p>Activates by  a molecular binding and phosphorylation mechanism.    <br />Experimentally demonstrated in epithelial cell line A431, fibroblasts, prostate cells and keratinocytes (Yu et al. 2000, Moro et al. 2002). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10825287">pmid:10825287</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11756413">pmid:11756413</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>EGF</th>
+              <td>
+                <p>Activates by a molecular binding mechanism. <br />Experimentally demonstrated by protein structural analyis and in epithelial cell lines A431, MDA-MB-468, CHO and MDCK (Ferguson et al.  2003, Lo et al. 2007).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12620237">pmid:12620237</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17909010">pmid:17909010</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RPTP</th>
+              <td>
+                <p>Inhibits by a dephosphorylation mechanism.  <br />Experimentally demonstrated in keratinocytes and CHO cell lines for RPTP kappa (Xu et al. 2005) and in HeLa cells for DEP1 (Tarcic et al. 2009). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16263724">pmid:16263724</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19836242">pmid:19836242</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>RAS</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(TGFb-TGFbR | MET | FAK_SRC | IL6 | SRC | EGFR) &amp; !GSK3B</li>
+          </ul>
+        </td>
+        <td>
+          <p>Ras GTPase family of proteins (P01116; P01112).<br /><br />Oncogenic protein that participates in EMT and cancer invasion by activating MAPK and IP3K/AKT signalling (Jancík et al. 2010).<br /><br />Effect: positive regulation of Ras protein signal transduction (GO:0046579)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P01116">uniprot:P01116</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P01112">uniprot:P01112</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/20617134">pmid:20617134</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TGFb-TGFbR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in epithelial cell lines HEK-293, Mv1Lu  and in fibroblast cell lines 3T3-Swiss and COS (Lee et al. 2007).<br />  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17673906">pmid:17673906</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>GSK3B</th>
+              <td>
+                <p>Inhibits by a phosphorylation and degradation mechanism.<br />Experimentally demonstrated in epithelial HEK293 cell line and in colon cancer cell line RKO (Jeong et al. 2012).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22494971">pmid:22494971</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in normal epithelial and cancer cell lines MDCK, HEK293 and PDA (Zou et al. 2002, Shields et al. 2011, Bunda et al. 2014).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11682467">pmid:11682467</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21242978">pmid:21242978</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25157176">pmid:25157176</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>EGFR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in fibroblast NIH 3T3 cell line and colorectal cancer cell lines (Rojas et al. 1996, Depeille et al. 2015, Oku et al.2012).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8910327">pmid:8910327</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26005835">pmid:26005835</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22968039">pmid:22968039</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>IL6</th>
+              <td>
+                <p>Activates by a molecular binding and phosphorylation mechanism. <br />Experimentally demonstrated in hepatic tumorigenesis model of zebrafish and in epithelial cell lines PC-3 and DU145 (Yang et al. 2003, Jung et al.2015,  Oku et al.2012).<br />Annotated in KEGG pathways reference map for the regulation of, Jak-STAT signalling (map04630).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12763015">pmid:12763015</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26297436">pmid:26297436</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22968039">pmid:22968039</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>MET</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in vitro and in cells from renal tissues of patients (Pelicci et al. 1995, Higuchi et al. 2004, Oku et al.2012). <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/7731718">pmid:7731718</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15314156">pmid:15314156</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22968039">pmid:22968039</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in epithelial cell line 293 (Schlaepfer &amp; Hunter 1997,  Oku et al.2012). <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9148935">pmid:9148935</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22968039">pmid:22968039</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>RAF1</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(RAS &amp; !ERK) | (RAS &amp; RAP1)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Proto-oncogene serine/threonine-protein kinase Raf 1 (uniprot:P04049).<br /><br />Activator of MAPK signalling during growth factors and ECM induced EMT (Lamouille et al. 2014, Farahani et al. 2014). <br /><br />Efect: activation of MAPKK activity (GO:0000186)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P04049">uniprot:P04049</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24531939">pmid:24531939</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ERK</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.<br />Experimentally demonstrated in fibroblast and carcinoma cell lines NIH3T3, COS, BRAFV600E, SW-620, SkBr3, DUSP6, SPRY2, FOSL1, and MY (Dougherty et al. 2005,   Ishii et al. 2013).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15664191">pmid:15664191</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23667175">pmid:23667175</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAS</th>
+              <td>
+                <p>Activates by a phosphorylation  mechanism.<br />Experimentally demonstrated in epithelial cell line RIE-1(McFall et al. 2001,  Oku et al.2012).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11463831">pmid:11463831</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22968039">pmid:22968039</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAP1</th>
+              <td>
+                <p>Activates by a phosphorylation mechanisms.  <br />Experimentally demonstrated in fibroblast cell lines Rat-1, NIH 3T3,  3T3-Swiss and PC12(Ohtsuka et al. 1996, York et al. 1998).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9560161">pmid:9560161</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8576107">pmid:8576107</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>MEK</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>RAF1 | PAK</li>
+          </ul>
+        </td>
+        <td>
+          <p>Dual specificity mitogen-activated kinase kinase (Q02750).<br /><br />Component of MAPK signalling, participates in E-cadherin mediated cell-cell adhesion during EMT (Lamouille et al. 2014, Farahani et al. 2014). <br /><br />Effect: MAP kinase kinase activity (GO:0004708)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q02750">uniprot:Q02750</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24531939">pmid:24531939</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>RAF1</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in normal epithelial cell line 293H  and in cancer cell lines BRAFV600E, SW-620, SkBr3, DUSP6, SPRY2, FOSL1, and MY (Joseph et al. 2010, Ishii et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20668238">pmid:20668238</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23667175">pmid:23667175</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>PAK</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in breast cancer cell line MCF7 and in fibroblast cell lines REF52 and COS-1 (Slack-Davis et al. 2008, Ebi et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12876277">pmid:12876277</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24327733">pmid:24327733</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>ERK</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>MEK</li>
+          </ul>
+        </td>
+        <td>
+          <p>Mitogen-activated kinase (P28482).<br /><br />Component of MAPK signalling, participates in dow-regulation of E-cadherin mediated cell-cell adhesion during EMT (Lamouille et al. 2014, Farahani et al. 2014). <br /><br />Effect: MAP kinase activity (GO:0004707)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P28482">uniprot:P28482</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24531939">pmid:24531939</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>MEK</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in normal and cancer epithelial cell lines 293H BRAFV600E, SW-620, SkBr3, DUSP6, SPRY2, FOSL1, and MY (Joseph et al. 2010, Ishii et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20668238">pmid:20668238</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23667175">pmid:23667175</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>STAT3</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>SRC | JNK</li>
+          </ul>
+        </td>
+        <td>
+          <p>Signal transducer and activator of transcription 3 (P40763).<br /><br />Participates as co-activator in the down-regulation of E-cadherin mediated cell-cell adhesion during EMT (Lamouille et al. 2014).<br /><br />Effect: transcription factor binding (GO:0008134) <br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P40763">uniprot:P40763</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24573038">pmid:24573038</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in cancer cell lines MDA-MB231, MCF7 and HepG2 (Kim et al. 2010, Liu et al. 2011).  <br />Annotated in KEGG pathways reference map for the regulation of Jak-STAT signalling (map04630).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11420660">pmid:11420660</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>JNK</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in normal and cancer epithelial cell lines BEAS-2B, MDA-MB231, MCF7 and HepG2  ( Kim et al. 2010, Liu et al. 2011).  <br />Annotated in KEGG pathways reference map for the regulation of Jak-STAT signalling (map04630).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22696236">pmid:22696236</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19766599">pmid:19766599</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>JNK</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(RAP1 &amp; RAS &amp; TGFb-TGFbR &amp; !ERK) | IL6</li>
+          </ul>
+        </td>
+        <td>
+          <p>Janus kinase (P23458).<br /><br />Down-regulates E-cadherin mediated cell-cell adhesion and participates in EMT (You et al. 2013, Lamouille et al. 2014).<br /><br />Effect: protein tyrosine kinase activity (GO:0004713)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P23458">uniprot:P23458</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24868495">pmid:24868495</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TGFb-TGFbR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in fibrosarcoma derived cell line HT1080, myoblasts C2C12 and fibroblasts from pacients (Hocevar et al 1999, Hanafusa et al. 1999, Hammaker et al. 2007).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10064600">pmid:10064600</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10480932">pmid:10480932</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17559674">pmid:17559674</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ERK</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.  <br />Experimentally demonstrated in epithelial cell line MDCK (Paumelle et al. 2000).  <br />  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11071904">pmid:11071904</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAS</th>
+              <td>
+                <p>Activates by a phosphorylation and molecular binding mechanism.  <br />Experimentally demonstrated in epithelial cell line 293T and fibroblasts cell line NIH 3T3.  (Mochizuki et al. 2000).  <br />Annotated in KEGG pathways reference map for the regulation of Jak-STAT signalling (map04630).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10777559">pmid:10777559</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>IL6</th>
+              <td>
+                <p>Activates by a molecular binding and phosphorylation mechanism.<br />Experimentally demonstrated in several cell lines and in hepatic tumorigenesis model of zebrafish (Stahl et al. 1994, Jung et al. 2015). <br />Annotated in KEGG pathways reference map for the regulation of, Jak-STAT signalling (map04630).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8272873">pmid:8272873</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26297436">pmid:26297436</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAP1</th>
+              <td>
+                <p>Activates by a  phosphorylation mechanism.  <br />Experimentally demonstrated in epithelial cell line HEK-293T (Hochbaum et al. 2003).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12783872">pmid:12783872</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>AKT</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(PI3K | ILK) &amp; SNAI</li>
+          </ul>
+        </td>
+        <td>
+          <p>RAC-alpha serine/threonine-protein kinase 1/2 (P31749; P31751).<br /><br />Cross-talks with beta-catenin/Wnt signalling and induces a survival phenotype in invasive tumours (Larue &amp; Bellacosa et al. 2005, Pereira et al. 2015). <br /><br />Effect: protein serine/threonine/tyrosine kinase activity (GO:0004712)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P31751">uniprot:P31751</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P31749">uniprot:P31749</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/16288291">pmid:16288291</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/26136161">pmid:26136161</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>PI3K</th>
+              <td>
+                <p>Activates by a  phosphorylation mechanism.<br />Experimentally demonstrated in mouse model of tumour cells (Dufour et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and PI3K-Akt signaling (map04151).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23867821">pmid:23867821</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ILK</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in prostate and hepatocyte cancer cells from pacients (Peroukides et al. 2011, Yuan et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19020711">pmid:19020711</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23783575">pmid:23783575</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SNAI</th>
+              <td>
+                <p>Activates by a transcription and  translation mechanism.<br />Experimentally demonstrated in breast cancer cell lines  MCF7 and MDA-MB-453 (Cheng et al. 2007, Waldmann et al. 2009).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19412634">pmid:19412634</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17332325">pmid:17332325</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>PI3K</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(RAS | FAK_SRC | IL6) &amp; (!b-Cat_mem | !E-Cad_mem:2)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Phosphatidylinositol 4,5-bisphosphate 3-kinase (P42336).<br /><br />Activator of AKT signalling pathway during EMT, crosstalk with several signalling pathways including E-Cadherin (Larue &amp; Bellacosa et al. 2005). <br /><br />Effect: Phosphatidylinositol 4,5-bisphosphate 3-kinase activity (GO:0046934) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P42336">uniprot:P42336</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/16288291">pmid:16288291</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>b-Cat_mem</th>
+              <td>
+                <p>Inhibits by a molecular binding mechanism.  <br />Experimentally demonstrated in keratinocytes and epithelial cell lines MDCK, HN5  and EJ (Woodfield et al. 2001).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11716761">pmid:11716761</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAS</th>
+              <td>
+                <p>Activates by a phosphorylation  mechanism.<br />Experimentally demonstrated in epithelial cell line RIE-1(McFall et al. 2001,  Oku et al.2012).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11463831">pmid:11463831</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22968039">pmid:22968039</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>IL6</th>
+              <td>
+                <p>Activates by a molecular binding and phosphorylation mechanism. <br />Experimentally demonstrated in epithelial cell lines PC-3, DU145 and in hepatic tumorigenesis model of zebrafish (Yang et al. 2003, Jung et al.2015).<br />Annotated in KEGG pathways reference map for the regulation of, Jak-STAT signalling (map04630).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12763015">pmid:12763015</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26297436">pmid:26297436</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>E-Cad_mem</th>
+              <td>
+                <p>Inhibits by a molecular binding mechanism.  <br />Experimentally demonstrated in keratinocytes and epithelial cell lines MDCK, HN5  and EJ (Woodfield et al. 2001).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11716761">pmid:11716761</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Activates  by a phosphorylation mechanism.  <br />Experimentally demonstrated in colon carcinoma cells (Turecková et al. 2009).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19956390">pmid:19956390</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>NFkB</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(AKT | ROS) &amp; CSL &amp; SMAD</li>
+          </ul>
+        </td>
+        <td>
+          <p>Nuclear factor NF-kappa-B complex (Q04206; P19838; Q00653).<br /><br />Participates in the SNAI induced downregulation of E-cadherin cell-cell adhesion during EMT (Lamouille et al. 2014). <br /><br />Effect: transcription factor activity, sequence-specific DNA binding (GO:0003700)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q04206">uniprot:Q04206</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P19838">uniprot:P19838</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q00653">uniprot:Q00653</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ROS</th>
+              <td>
+                <p>Activates by an oxidation mechanism.  <br />Experimentally demonstrated in epithelial cell line hRPE (Cervellati et al. 2014).  <br />Annotated in KEGG pathways reference map for the regulation of HIF-1 signalling (map04066).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24286355">pmid:24286355</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CSL</th>
+              <td>
+                <p>Activates  by a transcription and translation mechanism.  <br />Experimentally demonstrated in epithelial cell line MDA468,  T cells  and prostate epithelial cell lines (Espinosa et al. 2010, Kwon et al. 2014).  <br /><br /> </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25048699">pmid:25048699</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20832754">pmid:20832754</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>AKT</th>
+              <td>
+                <p>Activates by a  phosphorylation mechanism.<br />Experimentally demonstrated in several human epithelial cells (Julien et al. 2007).<br />Annotated in KEGG pathways reference map for the regulation of PI3K-Akt signaling (map04151).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17563753">pmid:17563753</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SMAD</th>
+              <td>
+                <p>Activates  by a transcription and translation mechanism.  <br />Experimentally demonstrated in fibroblast cell line C2C12, epithelial cell line MDA468,  T cells and prostate epithelial cell lines (Blokzijl et al. 2003, Espinosa et al. 2010, Kwon et al. 2014).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/14638857">pmid:14638857</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20832754">pmid:20832754</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25048699">pmid:25048699</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>HIF1a</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>ROS &amp; (STAT3 | NFkB)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Hypoxia-inducible factor 1-alpha (Q16665).<br /><br />Promotes EMT and metastasis in tumours (liu et al. 2015, Rankin &amp; Giaccia 2016). <br /><br />Effect: transcription factor activity, sequence-specific DNA binding (GO:0003700)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q16665">uniprot:Q16665</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/27124451">pmid:27124451</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/25559953">pmid:25559953</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ROS</th>
+              <td>
+                <p>Activates by a oxidation mechanism.  <br />Experimentally demonstrated in epithelial cell line hRPE (Cervellati et al. 2014).  <br />Annotated in KEGG pathways reference map for the regulation of HIF-1 signalling (map04066).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24286355">pmid:24286355</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>NFkB</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism. <br />Experimentally demonstrated in  human carcinoma cell lines MCF-7, MDA-MB-231 and HepG2 (Tacchini et al. 2004).<br />Annotated in KEGG pathways reference map for the regulation of HIF-1 signalling (map04066).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15240510">pmid:15240510</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>STAT3</th>
+              <td>
+                <p>Activates  by a transcription and  translation mechanism. <br />Experimentally demonstrated in breast cancer cell lines  MDA-MB-231 and RCC4 (Pawlus et al. 2014).<br />Annotated in KEGG pathways reference map for the regulation of HIF-1 signalling (map04066).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23604114">pmid:23604114</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>Wnt-Frizzled</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>TCF_LEF</li>
+          </ul>
+        </td>
+        <td>
+          <p>Human homolog Wnt and Frizzled ligand/receptor complex (Q9UP38; P04628).<br /><br />Component of the beta-catenin/Wnt signalling, negatively regulates cell-cell adhesion (MacDonald et al. 2009). <br /><br />Effect: positive regulation of canonical Wnt signaling pathway (GO:0090263) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q9UP38">uniprot:Q9UP38</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P04628">uniprot:P04628</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/19619488">pmid:19619488</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TCF_LEF</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.  <br />Experimentally demonstrated in mice embryos and in epithelial cell lines HEK293, P2E, Huh7, PLC, HLE, and HLF (Ulloa et al. 2007, Wang et al. 2011, Steinway et al. 2014).  <br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17331723">pmid:17331723</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21775418">pmid:21775418</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25189528">pmid:25189528</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>DVL</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>Wnt-Frizzled &amp; YAP_TAZ</li>
+          </ul>
+        </td>
+        <td>
+          <p>Human homolog of segment polarity protein dishevelled 1 (O14640).<br /><br />Component of beta-catenin/Wnt signalling, acts as a scaffold to maintain the signal to repress the beta-catenin destruction complex formation (MacDonald et al. 2009). <br />                                           <br />Effect: positive regulation of canonical Wnt signaling pathway (GO:0090263) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/O14640">uniprot:O14640</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/19619488">pmid:19619488</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>Wnt-Frizzled</th>
+              <td>
+                <p>Activates by a molecular binding and phosphorylation mechanism.  <br />Experimentally demonstrated during early Xenopus embryogenesis (Rothbächer  et al. 2000).<br />Annotated in KEGG pathways reference map for the regulation of Wnt signalling (map04310).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10698942">pmid:10698942</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>YAP_TAZ</th>
+              <td>
+                <p>Activates by a molecular binding mechanism. <br />Experimentally demonstrated in epithelial cell line HEK293T (Varelas et al. 2010).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20412773">pmid:20412773</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>CK1</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>Wnt-Frizzled &amp; !Dest_Complex</li>
+          </ul>
+        </td>
+        <td>
+          <p>Casein kinase 1 (P48729).<br /><br />Component of the beta-catenin/Wnt signalling (Stamos &amp; Weis et al. 2013), down-regulates E-cadherin mediated cell adhesion (Schittek &amp; Sinnberg et al. 2014).<br /><br />Effect: protein kinase activity (GO:0004672)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P48729">uniprot:P48729</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23169527">pmid:23169527</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/25306547">pmid:25306547</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>Dest_Complex</th>
+              <td>
+                <p>Inhibits by a molecular binding mechanism.<br />Experimentally demonstrated in epithelial cell line HEK293, colon cancer cell line SW-480-ADH and murine fibroblasts   (Liu et al. 2002, Del Valle-Pérez  et al. 2011).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11955436">pmid:11955436</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21606194">pmid:21606194</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>Wnt-Frizzled</th>
+              <td>
+                <p>Activates by a molecular binding mechanism. <br />Experimentally demonstrated in epithelial cell line HEK293, colon cancer cell line SW-480-ADH and murine fibroblasts (Del Valle-Pérez  et al. 2011).<br />Annotated in KEGG pathways reference map for the regulation of Wnt signalling (map04310).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21606194">pmid:21606194</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>b-Cat_nuc</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>!Dest_Complex &amp; YAP_TAZ &amp; !b-Cat_mem</li>
+          </ul>
+        </td>
+        <td>
+          <p>β-catenin in the nucleus (P35222).<br /><br />Activator of Wnt transcription, causes reduction of E-cadherin mediated cell-cell adhesion (Daugherty &amp; Gottardi 2007). <br /><br />Effect: transcription coactivator activity (GO:0003713)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P35222">uniprot:P35222</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/17928543">pmid:17928543</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>b-Cat_mem</th>
+              <td>
+                <p>Inhibits by a molecular binding and transport mechanism.<br />Experimentally demonstrated in epithelial cell line MDCK and in colon carcinoma cell line SW480 (Huber et al. 2001, Bhatia et al. 2005).  <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520). <br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10085258">pmid:10085258</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10198061">pmid:10198061</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11348595">pmid:11348595</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>Dest_Complex</th>
+              <td>
+                <p>Inhibits by a molecular binding and transport mechanism.<br />Experimentally demonstrated in epithelial cell line  293T, Drosophila and colon cancer cells (Liu et al. 2002, Roberts et al. 2011).<br />Annotated in KEGG pathways reference map for the regulation of Wnt signalling (map04310).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11955436">pmid:11955436</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21471006">pmid:21471006</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>YAP_TAZ</th>
+              <td>
+                <p>Activates by a molecular binding and transport mechanism. <br />Experimentally demonstrated in epithelial cell lines HEK293T and carcinoma cell lines  SW-480 and HT-29 M6 (Varelas et al. 2010,  Del Valle-Pérez  et al. 2011).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20412773">pmid:20412773</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24976009">pmid:24976009</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>TCF_LEF</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(!p120 &amp; b-Cat_nuc) | (TCF_LEF &amp; MET &amp; AKT)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Transcription factor TCF/LEF family  (IPR024940; Q9NQB0; Q9UJU2).<br /><br />Transcription factor activated by the beta-catenin/Wnt signalling and associated to the downregulation of E-cadherin mediated cell-cell adhesion during EMT (Lamouille et al. 2014, Daugherty &amp; Gottardi et al. 2007). <br /><br />Effect: transcription factor activity, sequence-specific DNA binding (GO:0003700)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/interpro/IPR024940">interpro:IPR024940</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q9NQB0">uniprot:Q9NQB0</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q9UJU2">uniprot:Q9UJU2</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/17928543">pmid:17928543</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>b-Cat_nuc</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.    <br />Experimentally demonstrated by structural analysis and in skin tumors (Huber et al. 2001, Bhatia et al. 2005).  <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11348595">pmid:11348595</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15765534">pmid:15765534</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>AKT</th>
+              <td>
+                <p>Activates by a  phosphorylation mechanism.<br />Experimentally demonstrated in epithelial cell lines A431, CHO AA8 and 293T (Fang et al. 2007).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17287208">pmid:17287208</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>p120</th>
+              <td>
+                <p>Inhibits by a transcriptional and translational mechanism.  <br />Experimentally demonstrated in normal and cancer epithelial cell lines SPC-A-1, LTEP-a-2 SW-480, HT-29 M6 and HEK-293 (Valle-Pérez et al. 2011, Liu et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24498333">pmid:24498333</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21670201">pmid:21670201</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>MET</th>
+              <td>
+                <p>Activates by a phosphorylation  mechanism.   <br />Experimentally demonstrated in mouse liver tissue, zebrafish embryos,  glioblastoma and the epithelial cell lines KM12C, KM,12L4, KM12SM and HEK293 (Herynk et al. 2003, Brembecket al. 2004, Nagér et al. 2015). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12856716">pmid:12856716</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15371335">pmid:15371335</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26654598">pmid:26654598</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>CD44</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>TCF_LEF</li>
+          </ul>
+        </td>
+        <td>
+          <p>Hyaluronic acid and CD44 antigen ligand/receptor complex (P16070).<br /><br />Interacts with integrins and receptor tyrosine kinases, considered to be involved in the initiation of metastasis (Orian-Rousseau et al. 2015, Farahani et al. 2014).  <br /><br />Effect: positive regulation of peptidyl-tyrosine phosphorylation (GO:0050731)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P16070">uniprot:P16070</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/25904917">pmid:25904917</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24531939">pmid:24531939</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TCF_LEF</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.  <br />Experimentally demonstrated in colon cancer samples and in mice small intestine tissue (Wielenga et al. 1999).  <br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10027409">pmid:10027409</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>SNAI</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>((ERK &amp; SMAD &amp; (TCF_LEF | CSL)) | (JNK &amp; SMAD &amp; NFkB)) &amp; (STAT3 | PAK | HIF1a | !GSK3B)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Human homolog Zinc finger protein snail 1 and 2 (O95863; O43623).   <br /><br />Binds to the promotor of E-cadherin gene and repress gene expression, down-regulates cell-cell adhesion and promotes EMT (Herreros et al. 2011, Lamouille et al. 2014). <br /><br />Effect: transcription factor activity, RNA polymerase II distal enhancer sequence-specific binding (GO:0003705)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/O95863">uniprot:O95863</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/O43623">uniprot:O43623</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/20455012">pmid:20455012</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>HIF1a</th>
+              <td>
+                <p>Activates by transcription and translational mechanism.  <br />Experimentally demonstrated in normal and cancer epithelial cell lines SKOV-3, HCT-116,  MCF7, MDA-231 and MCF10 (Sahlgren et al. 2008, Chen et al.2010).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18427106">pmid:18427106</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20010940">pmid:20010940</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>PAK</th>
+              <td>
+                <p>Activates by a phosphorylation and transport mechanism.<br />Experimentally demonstrated in epithelial breast cancer cell lines MCF-7, MDA-MB435, MDA-MD231 (Yang et al. 2005).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15833848">pmid:15833848</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ERK</th>
+              <td>
+                <p>Activates by a phosphorylation, transcription and  translation mechanism.<br />Experimentally demonstrated in normal and cancer epithelial cell lines IEC-6, HepG2, HepT1, HuH6, SW480 and  MDCK (Conacci-Sorrell et al. 2003, Christofori et al. 2006, Lemieux et al. 2009).<br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19462441">pmid:19462441</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16858414">pmid:16858414</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/14623871">pmid:14623871</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>GSK3B</th>
+              <td>
+                <p>Inhibits by a  phosphorylation and degradation mechanism.<br />Experimentally demonstrated in normal and cancer epithelial cell lines HaCat, MCF10A and HeLa (Zuo et al. 2004, Bachelder et al. 2005).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15631989">pmid:15631989</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15448698">pmid:15448698</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>NFkB</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.<br />Experimentally demonstrated in carcinoma cell lines SCC15, NBT-II, T47D, ZR75, MDA-MB231 and MBA-MB435 ( Julien et al. 2007, Wu et al. 2008).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17563753">pmid:17563753</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19411070">pmid:19411070</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CSL</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.<br />Experimentally demonstrated in epithelial, endothelial and carcinoma cell lines  293T, HUVEC, HMEC-1, Hep3B, Huh7, HT-29 MCF-7, MDA-MB-231, SK-BR-3, T47D and ZR-75-1 (Niessen et al. 2008, Lim et al. 2011,Shao  et al. 2015).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18663143">pmid:18663143</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22128911">pmid:22128911</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25645291">pmid:25645291</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>STAT3</th>
+              <td>
+                <p>Activates by a transcription and transport mechanism.<br />Experimentally demonstrated in  12 pancreatic carcinoma  samples  and 12 normal tissues samples and in the cancer epithelial cell lines Panc-1, A549 and H1650 (Unno et al 2009, Liu et al. 2014).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24573038">pmid:24573038</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19724917">pmid:19724917</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>JNK</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.  <br />Experimentally demonstrated in epithelial cell lines PDV and  293T (Santibañez 2006, Zhan et al.  2013).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16989819">pmid:16989819</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23557251">pmid:23557251</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SMAD</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.  <br />Experimentally demonstrated in fibroblast cell line COS1 and in epithelial cell lines  NMuMG, HepG2, MDA-MB-231 and  293T (Thuault  et al.  2006, Thuault  et al 2008).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16831886">pmid:16831886</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18832382">pmid:18832382</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>TCF_LEF</th>
+              <td>
+                <p>Activates by a transcription and translation mechanism.<br />Experimentally demonstrated in normal and cancer epithelial cell lines SW480, 293-T, HCT116, MDCK, and MDCK (Conacci-Sorrell et al. 2003).<br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/14623871">pmid:14623871</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>ZEB</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>!miR200 &amp; SMAD</li>
+          </ul>
+        </td>
+        <td>
+          <p>Zinc finger E-box-binding homeobox protein 1 and 2 (P37275; O60315). <br /><br />Binds to the promotor gene of E-cadherin and repress gene expression, downregulates cell-cell adhesion and promotes EMT (Lamouille et al. 2014). <br /><br />Effect: transcription factor activity, RNA polymerase II distal enhancer sequence-specific binding (GO:0003705)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P37275">uniprot:P37275</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/O60315">uniprot:O60315</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>miR200</th>
+              <td>
+                <p>Inhibits by a transcription mechanism.<br />Experimentally demonstrated in epithelial cell lines MDCK and MDA-MB-435 (Bracken et al. 2008).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18829540">pmid:18829540</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SMAD</th>
+              <td>
+                <p>Activates by a transcription mechanism.  <br />Experimentally demonstrated in epithelial cell line NRK-52E (Xiong et al.  2012).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22012804">pmid:22012804</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>ITGab</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>ECM | ((TGFb-TGFbR | CD44 | EGFR | ZEB) &amp; RAP1)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Transmembrane integrins alpha5/beta 1 and alpha6/beta4 dimers (Mierke et al. 2011, Stewart &amp; O'Connor 2015).<br /><br />Key components of focal adhesions that bind to ECM and propagate a outside-in signal; alpha5/beta 1 dimer induces high focal adhesion contractility (Mierke et al. 2011) and alpha6/beta4 dimer enhances integrin signalling intensity (O'Connor 2015).<br /><br />VARIABLE MEANING:<br />beta 1 and beta 4 integrin signalling (Mierke et al. 2011, Stewart &amp; O'Connor 2015).<br />0 = basal activity <br />1 = high activity (beta 1+ beta 4 signalling)</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/21224397">pmid:21224397</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/26121317">pmid:26121317</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>TGFb-TGFbR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.   <br />Experimentally demonstrated in epithelal cell lines MCF10A, MDA-MB-453 and BT-47 (Wang et al. 2009).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19147560">pmid:19147560</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CD44</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in breast cancer cell lines MDA-MB-231, MDA-MB-157 and PC3 (McFarlane et al. 2015).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26447611">pmid:26447611</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ECM</th>
+              <td>
+                <p>Activates by a molecular binding mechanism. <br />Experimentally demonstrated in mammary epithelial cell lines HB2 and MCF10 (Alford et al. 1998, Chaudhuri et al. 2014).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9443900">pmid:9443900</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24930031">pmid:24930031</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ZEB</th>
+              <td>
+                <p>Activates by a transcription and  translation mechanism.  <br />Experimentally demonstrated in a mutant Kras/p53 mouse model and in human lung cancer cell line H157 (Ungewiss et al. 2016).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26728244">pmid:26728244</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21224397">pmid:21224397</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>EGFR</th>
+              <td>
+                <p>Activates by  a phosphorylation mechanism.    <br />Experimentally demonstrated in keratinocytes and pancreatic carcinoma cells  (Bill et al. 2004, Ricono et al. 2009, Eberwein et al. 2015). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15367678">pmid:15367678</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19208836">pmid:19208836</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26079101">pmid:26079101</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAP1</th>
+              <td>
+                <p>Activates by  a transport mechanism.  <br />Experimentally demonstrated in epithelial cell lines COS and HEK293 (Lafuente et al.  2004). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15469846">pmid:15469846</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>ILK</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>ITGab</li>
+          </ul>
+        </td>
+        <td>
+          <p>Integrin-linked protein kinase (Q13418).<br /><br />Participates in integrin signalling and focal adhesion formation (Canel et al. 2013). <br /> <br />Effect: positive regulation of cell-matrix adhesion (GO:0001954). <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q13418">uniprot:Q13418</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23525005">pmid:23525005</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ITGab</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in ovarian adenocarcinoma cell lines IGROV1 and SKOV-3  (Cruet-Hennequart et al.  2003).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12642872">pmid:12642872</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>PAK</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>FAK_SRC | PI3K</li>
+          </ul>
+        </td>
+        <td>
+          <p>Serine/threonine-protein kinase PAK1 (Q13153).<br /><br />Key activator of Focal adhesion formation (Vicente-Manzanareset al. 2011).  <br /><br />Effect: protein kinase activity (GO:0004672)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q13153">uniprot:Q13153</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/22194302">pmid:22194302</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>PI3K</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in fibroblast cell line COS7 and carcinoma cell lines HeLa and MCF7 (Chan et al. 2008, Ebi et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18586681">pmid:18586681</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/24327733">pmid:24327733</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Activates by a phosphorylation  and molecular binding mechanism. <br />Experimentally demonstrated in epithelila cell line  CHO-K1  and in colon cancer lines HT-25 and RKO  (Nayal  et al. 2006, Sachdev et a. 2009).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16717130">pmid:16717130</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19138410">pmid:19138410</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>FAK_SRC</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>ITGab &amp; (EGFR | MET) &amp; ERK &amp; (SRC | FAK_SRC)</li>
+          </ul>
+        </td>
+        <td>
+          <p>Focal adhesion kinase (Q05397) complex with tyrosine-protein kinase Src (P12931) complex.<br /><br />Participates in the focal adhesion formation and turnover, involved in the control of cell-cell adhesion and cancer invasion (Bolós et al. 2010). <br /><br />Effect: signal transducer activity (GO:0004871)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q05397">uniprot:Q05397</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P12931">uniprot:P12931</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/20616959">pmid:20616959</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ERK</th>
+              <td>
+                <p>Activates by a dephosphorylation mechanism.  <br />Experimentally demonstrated in keratinocytes and epithelial cell lines E6, E7 and HaCaT (Kim et al. 2008, Eberwein et al. 2015).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26079101">pmid:26079101</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18543351">pmid:18543351</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Activates by a phosphorylation and molecular binding mechanism.  <br />Experimentally demonstrated in vitro, fibroblast cell line BALB/3T3 and  colon carcinoma cell line  KM12C (Calalbet al. 1995, Brunton et al. 2005).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/7529876">pmid:7529876</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15735019">pmid:15735019</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ITGab</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in keratinocytes and hepatocarcinoma cell lines HepG2 and Huh7 (Choma et al.  2007, Carnoli 2001).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11431732">pmid:11431732</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16917494">pmid:16917494</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>EGFR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in keratinocytes and epithelial cell lines E6, E7 and HaCaT (Kim et al. 2008, Eberwein et al. 2015).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18543351">pmid:18543351</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26079101">pmid:26079101</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>MET</th>
+              <td>
+                <p>Activates by  a phosphorylation mechanism.    <br />Experimentally demonstrated in epithelial cell lines HEK293 and MDCK (Chen et al. 2006, Chen et al. 2010). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20802513">pmid:20802513</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16782899">pmid:16782899</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>RAP1</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>FAK_SRC | CDH1</li>
+          </ul>
+        </td>
+        <td>
+          <p>Ras-related protein Rap-1 (P62834).<br /><br />Involved in the transport of E-cadherin, integrins beta1 and co-activation of MAPK/JNK signalling (Retta et al. 2006).     <br /><br />Effect: protein transporter activity (GO:0008565)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P62834">uniprot:P62834</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/16546572">pmid:16546572</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>CDH1</th>
+              <td>
+                <p>Activates by a transport mechanism.  <br />Experimentally demonstrated in the epithelial cell line MCF10A, fibroblasts cell line NIH/3T3 and endothelial cell line sEnd1 (Balzac et al. 2005).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16219685">pmid:16219685</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Activates by a phosphorylation and molecular binding mechanism.  <br />Experimentally demonstrated in HEK 293 epithelial cell line and fibroblasts cell lines NIH3T3 and WI-38(Li et al. 2002,Sakakibara et al. 2002, Ricono et al.2009).  <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).<br /> </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12432078">pmid:12432078</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11809811">pmid:11809811</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19208836">pmid:19208836</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>RPTP</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>RPTPL &amp; !ROS &amp; !SRC</li>
+          </ul>
+        </td>
+        <td>
+          <p>Receptor-type Protein-Tyrosine Phosphatase family members (Q12913; Q15262; P28827).<br /><br />Promotes cell-cell adhesion by interacting with E-cadherin/catenins complex and counteracting the effect of receptor tyrosine kinases (den Hertog et al. 2008, Xu et al. 2012). <br /><br />Effect: transmembrane receptor protein tyrosine phosphatase activity (GO:0005001) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q12913">uniprot:Q12913</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q15262">uniprot:Q15262</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/P28827">uniprot:P28827</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/22851429">pmid:22851429</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/18298791">pmid:18298791</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ROS</th>
+              <td>
+                <p>Inhibits by a oxidation mechanism.  <br />Experimentally demonstrated in human keratinocytes for RPTPkappa  and in HEK293 cell lines for RPTP eta (Xu et al. 2006, Godfrey et al. 2012).   </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16849327">pmid:16849327</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22438257">pmid:22438257</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RPTPL</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in epithelial cell line S2, A431D carcinoma and in endothelial cell line HRMEC (Sap et al. 1994, Takahashi et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8264577">pmid:8264577</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/27149518">pmid:27149518</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Inhibits by a  transcription mechanism.<br />Putative interaction based on the correlation between observed activation of overexpressed SRC construct and the down-regulation of RPTP kappa in (Hirsch et al. 2010). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20385360">pmid:20385360</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>SRC</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(MET | EGFR) &amp; !FAK_SRC</li>
+          </ul>
+        </td>
+        <td>
+          <p>Free form of proto-oncogene tyrosine-protein kinase Src (P12931).<br /><br />Participates in the dissolution of adherent junctions and is able to sustain MAPK and STAT3 oncogenic signaling under over-expressed conditions in tumours (Kim et al. 2009). <br /><br />Effect: protein tyrosine kinase activity (GO:0004713) <br />0 = basal activity<br />1 = high activity<br />  </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P12931">uniprot:P12931</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/19787002">pmid:19787002</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>EGFR</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in keratinocytes, fibroblast cell line NIH 3T3 and cancer cell lines MCF-7 and B104 (Vadlamudi et al. 2003, Eberwein et al. 2015). <br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12753909">pmid:12753909</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26079101">pmid:26079101</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>MET</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.  <br />Experimentally demonstrated in epithelial cell line Mv1Lu and carcinoma cell lines SIP1, HEY A8 and SKOV3ip1 (Rahimi et al. 1998, Mitra et al. 2011).  <br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9837958">pmid:9837958</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21119598">pmid:21119598</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Inhibits by a  molecular binding mechanism.<br />Experimentally demonstrated in epithelial cells from chicken (Schaller et al. 1999).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10512882">pmid:10512882</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>FAT4</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>FAT4L &amp; !ERK</li>
+          </ul>
+        </td>
+        <td>
+          <p>Human homolog of Drosophila FAT4 protein receptor (Q6V0I7). <br /><br />Acts as a tumour suppressor by regulating the hippo signalling (Katoh 2012).<br /><br />Effect: negative regulation of hippo signaling (GO:0035329) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/Q6V0I7">uniprot:Q6V0I7</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23076869">pmid:23076869</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ERK</th>
+              <td>
+                <p>Inhibits by a transcription and translation mechanism.  <br />Experimentally demonstrated in human mammary epithelial cell line MCF-10A (Ito et al. 2015).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/25679223">pmid:25679223</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAT4L</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in vivo for mouse kidney and skeletal morphogenesis during development (Mao et al.  2015, 2016).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/26116666">pmid:26116666</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/27145737">pmid:27145737</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>LATS</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(b-Cat_mem:1 &amp; E-Cad_mem &amp; !PI3K) | FAT4</li>
+          </ul>
+        </td>
+        <td>
+          <p>Large tumour suppressor complex LATS1/2 (O95835; Q9NRM7).<br /> <br />Tumor suppressor that negatively regulates Wnt/beta-catenin signalling pathway by preventing YAP1 nuclear translocation in the Hippo signaling pathway (Hao et al. 2008, Varelas et al. 2010). <br /> <br />Effect: Negative regulation of canonical Wnt signaling pathway  (GO:0090090) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/O95835">uniprot:O95835</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q9NRM7">uniprot:Q9NRM7</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/18158288">pmid:18158288</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/20412773">pmid:20412773</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>b-Cat_mem</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.  <br />Experimentally demonstrated in normal and cancer epithelial cell lines MCF-7 and MCF10A (Kim et al. 2011).  <br />Annotated in KEGG pathways reference map for the regulation of Hippo signalling (map04390).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21730131">pmid:21730131</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>PI3K</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.<br />Experimentally demonstrated in epithelial cell line MCF-10A (Fan et al. 2013).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23359693">pmid:23359693</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAT4</th>
+              <td>
+                <p>Activates  by a molecular binding  mechanism.  <br />Experimentally demonstrated in Drosophila tissue development (Bennett &amp; Harvey 2006).<br />Annotated in KEGG pathways reference map for the regulation of Hippo signalling (map04390).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17045801">pmid:17045801</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>E-Cad_mem</th>
+              <td>
+                <p>Activates by a molecular binding  mechanism.  <br />Experimentally demonstrated in normal and cancer epithelial cell lines MCF-7 and MCF10A (Kim et al. 2011).   <br />Annotated in KEGG pathways reference map for the regulation of Hippo signalling (map04390).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21730131">pmid:21730131</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>YAP_TAZ</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>!LATS</li>
+          </ul>
+        </td>
+        <td>
+          <p>Transcriptional coactivators YAP and TAZ (P46937; Q9GZV5).<br /><br />Hippo signalling component that participates in TGF-beta and beta-catenin/Wnt signalling activation as co-activators (Kim &amp; Jho 2014).<br /><br />Effect: transcription coactivator activity (GO:0003713)<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P46937">uniprot:P46937</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/uniprot/Q9GZV5">uniprot:Q9GZV5</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/25154721">pmid:25154721</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>LATS</th>
+              <td>
+                <p>Inhibits by a phosphorylation and  transport mechanism.<br />Experimentally demonstrated in epithelial cell line HEK293T (Varelas et al. 2010).<br />Annotated in KEGG pathways reference map for the regulation of Hippo signalling (map04390).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/20412773">pmid:20412773</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>GSK3B</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>!DVL &amp; !ERK &amp; !AKT</li>
+          </ul>
+        </td>
+        <td>
+          <p>Glycogen synthase kinase 3 beta (P49841). <br /><br />Negative regulator of both beta-catenin/Wnt signalling and Snail induced EMT, promotes cell-cell adhesion (MacDonald et al. 2009, Lamouille et al. 2014).<br /><br />Effect: protein kinase activity (GO:0004672)<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P49841">uniprot:P49841</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/19619488">pmid:19619488</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ERK</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.<br />Experimentally demonstrated in gastric cancer cell lines SNU638, SNU668 and B16F10 (Ryu et al. 2012).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22328534">pmid:22328534</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>DVL</th>
+              <td>
+                <p>Inhibits by a molecular binding and phosphorylation mechanism.  <br />Experimentally demonstrated in fibroblasts, B cells and epithelial cell line 293T (Cook et al.1996, Fukumoto et al 2001, Christian et al. 2002).<br />Annotated in KEGG pathways reference map for the regulation of Wnt signalling (map04310).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8887544">pmid:8887544</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11278246">pmid:11278246</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12097378">pmid:12097378</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>AKT</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.<br />Experimentally demonstrated in epithelial cell line BEAS-2B (Pan et al. 2011).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510) and PI3K-Akt signaling (map04151).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21837363">pmid:21837363</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>Dest_Complex</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>GSK3B &amp; b-Cat_mem</li>
+          </ul>
+        </td>
+        <td>
+          <p>β-catenin destruction complex (Stamos &amp; Weis et al. 2013).<br /><br />Component of beta-catenin/Wnt signalling, acts on cytoplasmic beta-catenin preventing the nuclear translocation by targeting beta-catenin to degradation (Stamos &amp; Weis et al. 2013). <br /><br />Effect: Binding to beta-catenin and CK1 (Stamos &amp; Weis et al. 2013).<br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/23169527">pmid:23169527</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/21471006">pmid:21471006</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>b-Cat_mem</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in epithelial cell line  293T (Liu et al. 2002).<br />Annotated in KEGG pathways reference map for the regulation of Wnt signalling (map04310).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11955436">pmid:11955436</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>GSK3B</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in epithelial cell line  293T (Liu et al. 2002).<br />Annotated in KEGG pathways reference map for the regulation of Wnt signalling (map04310).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/11955436">pmid:11955436</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>miR200</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>!ZEB &amp; !SNAI</li>
+          </ul>
+        </td>
+        <td>
+          <p>Micro RNA 200 family (Humphries &amp; Yang et al. 2015).  <br /><br />Promotes E-cadherin mediated cell-cell adhesion by preventing EMT (Humphries &amp; Yang et al. 2015). <br /><br />Effect: repression of ZEB gene expression (Humphries &amp; Yang et al. 2015).<br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/25762624">pmid:25762624</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ZEB</th>
+              <td>
+                <p>Activates by a transcription mechanism.  <br />Experimentally demonstrated in epithelial cell line NRK-52E (Xiong et al.  2012).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/22012804">pmid:22012804</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SNAI</th>
+              <td>
+                <p>Inhibits by a transcription mechanism.<br />Experimentally demonstrated in embryonic stem cell lines MC50 and A2lox during EMT (Gill et al. 2011).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21394833">pmid:21394833</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>CDH1</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>!ZEB | !SNAI</li>
+          </ul>
+        </td>
+        <td>
+          <p>Cadherin 1 gene product (999).<br /><br />Translation of the gene produces the protein E-cadherin which is required for cell-cell adhesion (Lamouille et al. 2014).<br />                                                                                                                  <br />Effect: synthesis of E-cadherin protein <br />0 = basal activity<br />1 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="https://www.ncbi.nlm.nih.gov/gene/999">https://www.ncbi.nlm.nih.gov/gene/999</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24556840">pmid:24556840</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>ZEB</th>
+              <td>
+                <p>Inhibits by a transcription mechanism.<br />Experimentally demonstrated in epithelial HK-2 and MDCK cell lines (Bracken et al.2008, Oba et al. 2010).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18829540">pmid:18829540</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21049046">pmid:21049046</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>SNAI</th>
+              <td>
+                <p>Inhibits by a transcription mechanism.<br />Experimentally demonstrated in epithelial cell line MDCK and squamous cells from normal and cancer tissue samples (Bolós et al.2003, Zhau et al. 2013).<br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12508111">pmid:12508111</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/23906494">pmid:23906494</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>p120</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(!MET &amp; !SRC &amp; !CK1) | RPTP</li>
+          </ul>
+        </td>
+        <td>
+          <p>Unphosphorylated form of δ-catenin (O60716).<br /> <br />The unphosphorylated form promotes cell-cell adhesion by stabilizing E-cadherin at the membrane (Xiao et al. 2007, Hong et al. 2016). This prevents canonical Wnt signalling activation because the phosphorylation of δ-catenin is required for nuclear translocation and TCF/LEF co-activation (Hong et al. 2016). <br /><br />Effect: Cadherin binding involved in cell-cell adhesion (GO:0098641) <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/O60716">uniprot:O60716</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/16949165">pmid:16949165</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/26477567">pmid:26477567</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanisms.   <br />Experimentally demonstrated in vitro and in epithelial cell line CaCo (Roura et al. 1999).   <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10593980">pmid:10593980</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CK1</th>
+              <td>
+                <p>Inhibits by a molecular phosphorylation mechanism.  <br />Experimentally demonstrated in epithelial cell line HEK-293 and cancer cell lines SW-480, and HT-29M6 (Valle-Pérez et al. 2011).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21670201">pmid:21670201</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RPTP</th>
+              <td>
+                <p>Activates by dephosphorylation mechanism.  <br />Experimentally demonstrated in lung cancer cell line A549 and  Lymphoblast cell line K562 for DEP1 (Holsinger et al. 2002).  <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12370829">pmid:12370829</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>MET</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanisms.   <br />Experimentally demonstrated in vitro and in epithelial, fibroblast and cancer cell lines HT29,  NIH3T3 and H1993 (Shibamoto et al. 1995, Lutterbach et al. 2007).   <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/7876318">pmid:7876318</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17332337">pmid:17332337</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th>b-Cat_mem</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>(!MET &amp; !SRC &amp; !FAK_SRC &amp; !JNK &amp; CDH1) | (RPTP &amp; CDH1)</li>
+          </ul>
+        </td>
+        <td>
+          <p>β-catenin in the membrane (P35222).<br /><br />Binds to E-cadherin in the membrane and participates in cell-cell adhesion by reinforcing the adherens junctions (Daugherty &amp; Gottardi 2007).   <br /><br />Effect: Cadherin binding involved in cell-cell adhesion (GO:0098641)      <br />0 = basal activity<br />1 = high activity</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P35222">uniprot:P35222</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/17928543">pmid:17928543</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>SRC</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanisms.   <br />Experimentally demonstrated in vitro and in CaCo epithelial cell line CaCo(Roura et al. 1999).   <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10593980">pmid:10593980</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>JNK</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.  <br />Experimentally demonstrated in keratinocytes and epidermoid carcinoma cell line ME180 (Lee et al.  2009, Lee et al. 2011).   </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21030692">pmid:21030692</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19667122">pmid:19667122</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RPTP</th>
+              <td>
+                <p>Activates by dephosphorylation mechanism.  <br />Experimentally demonstrated in breast tumour cell line SK-BR-3 for RPTP kappa (Fuchs et al.  1996) and in lung cancer cell line A549 for DEP1 (Holsinger et al. 2002). Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8663237">pmid:8663237</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12370829">pmid:12370829</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>MET</th>
+              <td>
+                <p>Inhibits by a phosphorylation  mechanism.  <br />Experimentally demonstrated in epithelial cancer cell lines KM12C,  H1993 , HuH-6 and HuH-7 (Lutterbach et al. 2007, Purcell et al. 2011).  <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/17332337">pmid:17332337</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21992464">pmid:21992464</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CDH1</th>
+              <td>
+                <p>activates by a molecular binding mechanism.  <br />Experimentally demonstrated in epithelial MDCK cell line (Huber et al. 2001). <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).<br />Considered in a network model for the regulation of EMT in hepatocytes (Steinway et al. 2014).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10037790">pmid:10037790</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Inhibits by a phosphorylation mechanism.  <br />Experimentally demonstrated in adenocarcinoma cell lines Panc-1 and BxPC-3 (Koenig et al. 2006).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16651417">pmid:16651417</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th rowspan="2">E-Cad_mem</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>CDH1 &amp; RAP1 &amp; !p120</li>
+          </ul>
+        </td>
+        <td rowspan="2">
+          <p>E-cadherin in the membrane (P12830).<br /><br />Key adhesion molecule that ensures epithelial cell-cell adhesion by homophilic binding (Gumbiner et al. 2005, Farahani et al. 2014).<br />                                                                        <br />Effect: cell adhesion molecule binding (GO:0050839) <br />0 = basal activity<br />1 = intermediate activity<br />2 = high activity </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/uniprot/P12830">uniprot:P12830</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/16025097">pmid:16025097</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/24531939">pmid:24531939</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>p120</th>
+              <td>
+                <p>Activates by a molecular binding and transport  mechanism.  <br />Experimentally demonstrated in vitro, fibroblast cell line NIH3T3 and cancer cell lines SW48, HT29, MDA231 and A431D (Shibamoto et al. 1995, Thoreson et al. 2000, Ireton et al. 2003).  <br />Present in KEGG reference signalling pathway for the regulation of cell-cell adherens junctions (map04520). </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/7876318">pmid:7876318</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10629228">pmid:10629228</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12427869">pmid:12427869</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>RAP1</th>
+              <td>
+                <p>Activates by a transport mechanism.    <br />Experimentally demonstrated in the epithelial cell line MCF10A, fibroblasts cell line NIH/3T3 and endothelial cell line sEnd1 (Balzac et al. 2005).  </p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16219685">pmid:16219685</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>CDH1</th>
+              <td>
+                <p>Activates by a transport mechanism.    <br />Experimentally demonstrated for human and mouse based on DNA analysis (Bussemakers et al. 1993, Berx et al. 1995).  <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/8459805">pmid:8459805</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/7601454">pmid:7601454</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>
+          <ul class="L1">
+            <li>CDH1 &amp; p120 &amp; RAP1</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Focal_Adhesion_Dynamics</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>ITGab &amp; PAK &amp; FAK_SRC</li>
+          </ul>
+        </td>
+        <td>
+          <p>Focal adhesion dynamics (Vicente-Manzanares et al. 2011).<br /><br />Reflects the adherent capacity of cells to move along the extracellular matrix. Frequently associated to cancer invasion (Vicente-Manzanares et al. 2011, Nagano et al. 2012, Kim &amp; Wirtz 2013). <br /><br />Effect: dynamic formation and turnover of focal adhesions (Nagano et al. 2012)<br />0 = basal dynamics<br />1 = high dynamics</p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/22194302">pmid:22194302</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/22319531">pmid:22319531</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23628962">pmid:23628962</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>PAK</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in the epithelial, fibroblasts and carcinoma cell lines CHO-K1, 293T, NIH3T3, COS-1 and COS7 (Nayal et al. 2006, Chan et al. 2008, Cheng et al. 2009).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16717130">pmid:16717130</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/18586681">pmid:18586681</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19136554">pmid:19136554</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ITGab</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.<br />Experimentally demonstrated in epithelial cells from colon, breast, skin, lung, prostate, pancreas, bladder and  kidney tumours (Mierke  et al 2011).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/21224397">pmid:21224397</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>FAK_SRC</th>
+              <td>
+                <p>Activates by a phosphorylation mechanism.<br />Experimentally demonstrated in mouse embryo fibroblasts and colon carcinoma cell lines KM12C, DLD-1, HT29, and SW620  (Westhoff et al. 2004, Brunton et al. 2005,Turecková et al. 2009).<br />Annotated in KEGG pathways reference map for the regulation of focal adhesion (map04510).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15340073">pmid:15340073</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/15735019">pmid:15735019</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/19956390">pmid:19956390</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th rowspan="2">Cell-Cell_Adhesion</th>
+        <td>1</td>
+        <td>
+          <ul class="L1">
+            <li>E-Cad_mem:1 | (E-Cad_mem:2 &amp; !b-Cat_mem)</li>
+          </ul>
+        </td>
+        <td rowspan="2">
+          <p>E-cadherin mediated cell-cell adhesion strength (Le Bras et al. 2012).<br /><br />Critical property that changes during EMT and is thought to play a role in cancer invasion (Le Bras et al. 2012,  Canel et al. 2013). <br /><br />Effect: potential for cell-cell adhesion  (Le Bras et al. 2012,  Canel et al. 2013). <br />0 = basal<br />1 = intermediate<br />2 = high </p>
+          <ul class="L1">
+            <li>
+              <a href="http://identifiers.org/pubmed/22796940">pmid:22796940</a>
+            </li>
+            <li>
+              <a href="http://identifiers.org/pubmed/23525005">pmid:23525005</a>
+            </li>
+          </ul>
+          <table name="" class="">
+            <tr class="">
+              <th>Regulator</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <th>b-Cat_mem</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.<br />Experimentally demonstrated in epithelial cell lines HEK 293, MDCK, PtK2 and UG1  (Adams et al. 1998, Vasioukhin et al. 2000, Yamada et al 2005).  <br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9722621">pmid:9722621</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/16325582">pmid:16325582</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10660044">pmid:10660044</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>E-Cad_mem</th>
+              <td>
+                <p>Activates by a molecular binding mechanism.<br />Experimentally demonstrated in epithelial cell lines HEK 293, MDCK, SW48 and Schneider S2 (Adams et al. 1998, Thoreson et al. 2000, Pacquelet et al.  2003).<br />Annotated in KEGG pathways reference map for the regulation of adherens junctions (map04520).</p>
+                <ul class="L1">
+                  <li>
+                    <a href="http://identifiers.org/pubmed/9722621">pmid:9722621</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/10629228">pmid:10629228</a>
+                  </li>
+                  <li>
+                    <a href="http://identifiers.org/pubmed/12551956">pmid:12551956</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>
+          <ul class="L1">
+            <li>b-Cat_mem &amp; E-Cad_mem:2</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
