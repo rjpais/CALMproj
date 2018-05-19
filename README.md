@@ -1,9 +1,11 @@
 # Cell Adhesion Network Model
-This project compose my PhD thesis which started from 2014 and end in 2017.
-I have made public all the data and analysis produced in this PhD thesis. 
+This project compose my PhD thesis during 2014 to the end of 2017.
+During this time I contructed, validated and analysed a logical network model of the regulation of cell adhesion properties during Epithelial-to-Mesenchymal Transition. 
+ 
 In this repository, I have included: 
-  * The network model;  
-  * The phyton scripts and R code of the model analysis; 
+  * The network model implemented in GINsime;  
+  * The model documentation in XHTML file format
+  * The phyton scripts and R code used in the model analysis; 
   * A copy of the thesis in pdf.   
 
-All the work was supervised by Doctor Claudine Chaouiya and conducted in instituto de ciência Gulbenkian in Oeiras, Portugal. 
+All work was supervised by Doctor Claudine Chaouiya and conducted in instituto de ciência Gulbenkian in Oeiras, Portugal. 
