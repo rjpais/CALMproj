@@ -1,4 +1,4 @@
-# Cell Adhesion Network Model
+# Cell Adhesion Logical Modelling (CALM) project 
 This project compose my PhD thesis during 2014 to the end of 2017.
 During this time I constructed, validated and analysed a logical network model of the regulation of cell adhesion properties during Epithelial-to-Mesenchymal Transition. 
  
