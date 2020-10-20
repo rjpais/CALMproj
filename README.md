@@ -6,6 +6,6 @@ The project was extended in BioenhancerSystems for refinement and further model 
 In this repository, I have included: 
   * The network model implemented in GINsim;  
   * The model documentation in XHTML file format
-  * The phyton scripts and R code used for model analysis; 
+  * The python scripts and R code used for model analysis; 
   * A copy of the thesis in pdf (version under revision).   
 
